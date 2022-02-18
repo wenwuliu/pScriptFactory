@@ -10,8 +10,10 @@ file=$fullDir/$1.py
 if [ -d $fullDir ];then
     echo "building ..."
     cd $fullDir
-    sudo pyinstaller --log-level=ERROR --clean -y $file
-    sudo mv dist/$1/$1 dist/$1/$1.pybn
+    sudo pyinstaller -F  --clean -y $file -p ~/.local/lib/python3.8/site-packages/
+    sudo mv dist/$1 dist/$1.pybn
+    sudo mkdir dist/$1
+    sudo mv dist/$1.pybn dist/$1/$1.pybn
     sudo cp -R -f dist/$1 $home/.self-built-command/common/$1
     sudo rm -rf dist
     sudo rm -rf build
